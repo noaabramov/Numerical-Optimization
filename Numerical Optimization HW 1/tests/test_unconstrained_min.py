@@ -16,7 +16,7 @@ class TestUnconstrainedMin(unittest.TestCase):
         for method in methods:
             final_location, final_objective, success, path = minimize(quadratic_1, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
             values = {method: path['values']}
-            paths = {method: path['path']}
+            paths = {method: np.array(path['path'])}
 
         plot_contour(quadratic_1, x_lim=(-2, 2), y_lim=(-2, 2), title='Contour of Quadratic #1 Objective Function', paths=paths)
         plot_values({'Optimization Path': values}, title='Function Values per Iteration of Quadratic #1 Objective Function')
@@ -30,7 +30,7 @@ class TestUnconstrainedMin(unittest.TestCase):
         for method in methods:
             final_location, final_objective, success, path = minimize(quadratic_2, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
             values = {method: path['values']}
-            paths = {method: path['path']}
+            paths = {method: np.array(path['path'])}
 
         plot_contour(quadratic_1, x_lim=(-2, 2), y_lim=(-2, 2), title='Contour of Quadratic #2 Objective Function', paths=paths)
         plot_values({'Optimization Path': values}, title='Function Values per Iteration of Quadratic #2 Objective Function')
@@ -43,7 +43,7 @@ class TestUnconstrainedMin(unittest.TestCase):
         for method in methods:
             final_location, final_objective, success, path = minimize(quadratic_3, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
             values = {method: path['values']}
-            paths = {method: path['path']}
+            paths = {method: np.array(path['path'])}
 
         plot_contour(quadratic_1, x_lim=(-2, 2), y_lim=(-2, 2), title='Contour of Quadratic #3 Objective Function', paths=paths)
         plot_values({'Optimization Path': values}, title='Function Values per Iteration of Quadratic #3 Objective Function')
@@ -56,7 +56,7 @@ class TestUnconstrainedMin(unittest.TestCase):
         for method in methods:
             final_location, final_objective, success, path = minimize(rosenbrock, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=10000, method=method)
             values = {method: path['values']}
-            paths = {method: path['path']}
+            paths = {method: np.array(path['path'])}
 
         plot_contour(quadratic_1, x_lim=(-2, 2), y_lim=(-2, 5), title='Contour of Rosenbrock Objective Function', paths=paths)
         plot_values({'Optimization Path': values}, title='Function Values per Iteration of Rosenbrock Objective Function')
@@ -69,7 +69,7 @@ class TestUnconstrainedMin(unittest.TestCase):
         for method in methods:
             final_location, final_objective, success, path = minimize(linear, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
             values = {method: path['values']}
-            paths = {method: path['path']}
+            paths = {method: np.array(path['path'])}
 
         plot_contour(quadratic_1, x_lim=(-300, 2), y_lim=(-300, 2), title='Contour of Linear Objective Function', paths=paths)
         plot_values({'Optimization Path': values}, title='Function Values per Iteration of Linear Objective Function')
@@ -82,7 +82,7 @@ class TestUnconstrainedMin(unittest.TestCase):
         for method in methods:
             final_location, final_objective, success, path = minimize(exp_function, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
             values = {method: path['values']}
-            paths = {method: path['path']}
+            paths = {method: np.array(path['path'])}
 
         plot_contour(quadratic_1, x_lim=(-1, 1), y_lim=(-1, 1), title='Contour of Exponential Objective Function', paths=paths)
         plot_values({'Optimization Path': values}, title='Function Values per Iteration of Exponential Objective Function')
