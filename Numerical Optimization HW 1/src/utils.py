@@ -23,7 +23,7 @@ def plot_contour(f, x_lim, y_lim, title, paths={}, levels=100):
     plt.show()
 
 
-def plot_function_values(values_dict, title):
+def plot_values(values_dict, title):
     fig, ax = plt.subplots(1, 1)
     for name, values in values_dict.items():
         x = np.linspace(0, len(values)-1, len(values))

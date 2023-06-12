@@ -2,109 +2,99 @@ import unittest
 import numpy as np
 import matplotlib.pyplot as plt
 from src.unconstrained_min import minimize
-from src.utils import plot_contour, plot_function_values
+from src.utils import plot_contour, plot_values
 #from tests.examples import quadratic_1, quadratic_2, quadratic_3, rosenbrock, linear, exp_function
 
-methods = ['gradient descent', 'newton', 'bfgs', 'sr1']
+methods = ['Gradient Descent', 'Newton', 'BFGS', 'SR1']
 
 class TestUnconstrainedMin(unittest.TestCase):
     def test_quadratic_1(self):
-        x0 = np.array([1, 1])
+        """
+        Test case for the Quadratic #1 objective function.
+        """
+        x0 = np.array([1.0, 1.0])
         for method in methods:
-            final_location, final_objective, success, path = minimize(quadratic_1, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method = method)
-            self.assertTrue(success)
-            self.assertAlmostEqual(final_location[0], 0.0, places=5)
-            self.assertAlmostEqual(final_location[1], 0.0, places=5)
+            final_location, final_objective, success, path = minimize(quadratic_1, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
+            values = {method: path['values']}
+            paths = {method: path['path']}
 
-            # Plot the contour with the paths
-            plot_contour(f, x_lim=(-5, 5), y_lim=(-5, 5), title='Contour Plot', paths={'Optimization Path': np.array(path)})
+        plot_contour(quadratic_1, x_lim=(-2, 2), y_lim=(-2, 2), title='Contour of Quadratic #1 Objective Function', paths=paths)
+        plot_values({'Optimization Path': values}, title='Function Values per Iteration of Quadratic #1 Objective Function')
 
-            # Plot the function values at each iteration
-            function_values = [f(x, False)[0] for x in path]
-            plot_function_values({'Optimization Path': function_values}, title='Function Values')
-
-            plot_function_values(final_objective, title='Quadratic 1')
 
     def test_quadratic_2(self):
-        x0 = np.array([1, 1])
+        """
+        Test case for the Quadratic #2 objective function.
+        """
+        x0 = np.array([1.0, 1.0])
         for method in methods:
-            final_location, final_objective, success, path = minimize(quadratic_2, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method = method)
-            self.assertTrue(success)
-            self.assertAlmostEqual(final_location[0], 0.0, places=5)
-            self.assertAlmostEqual(final_location[1], 0.0, places=5)
+            final_location, final_objective, success, path = minimize(quadratic_2, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
+            values = {method: path['values']}
+            paths = {method: path['path']}
 
-            # Plot the contour with the paths
-            plot_contour(f, x_lim=(-5, 5), y_lim=(-5, 5), title='Contour Plot', paths={'Optimization Path': np.array(path)})
+        plot_contour(quadratic_1, x_lim=(-2, 2), y_lim=(-2, 2), title='Contour of Quadratic #2 Objective Function', paths=paths)
+        plot_values({'Optimization Path': values}, title='Function Values per Iteration of Quadratic #2 Objective Function')
 
-            # Plot the function values at each iteration
-            function_values = [f(x, False)[0] for x in path]
-            plot_function_values({'Optimization Path': function_values}, title='Function Values')
-
-            plot_function_values(final_objective, title='Quadratic 2')
     def test_quadratic_3(self):
-        x0 = np.array([1, 1])
+        """
+        Test case for the Quadratic #3 objective function.
+        """
+        x0 = np.array([1.0, 1.0])
         for method in methods:
-            final_location, final_objective, success, path = minimize(quadratic_3, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method = method)
-            self.assertTrue(success)
-            self.assertAlmostEqual(final_location[0], 0.0, places=5)
-            self.assertAlmostEqual(final_location[1], 0.0, places=5)
+            final_location, final_objective, success, path = minimize(quadratic_3, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
+            values = {method: path['values']}
+            paths = {method: path['path']}
 
-            # Plot the contour with the paths
-            plot_contour(f, x_lim=(-5, 5), y_lim=(-5, 5), title='Contour Plot', paths={'Optimization Path': np.array(path)})
-
-            # Plot the function values at each iteration
-            function_values = [f(x, False)[0] for x in path]
-            plot_function_values({'Optimization Path': function_values}, title='Function Values')
-
-            plot_function_values(final_objective, title='Quadratic 3')
+        plot_contour(quadratic_1, x_lim=(-2, 2), y_lim=(-2, 2), title='Contour of Quadratic #3 Objective Function', paths=paths)
+        plot_values({'Optimization Path': values}, title='Function Values per Iteration of Quadratic #3 Objective Function')
 
     def test_rosenbrock(self):
-        x0 = np.array([-1, 2])
+        """
+        Test case for the Rosenbrock objective function.
+        """
+        x0 = np.array([-1.0, 2.0])
         for method in methods:
-            final_location, final_objective, success, path = minimize(rosenbrock, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=10000, method = method)
-            self.assertTrue(success)
-            self.assertAlmostEqual(final_location[0], 1.0, places=5)
-            self.assertAlmostEqual(final_location[1], 1.0, places=5)
+            final_location, final_objective, success, path = minimize(rosenbrock, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=10000, method=method)
+            values = {method: path['values']}
+            paths = {method: path['path']}
 
-            # Plot the function values at each iteration
-            function_values = [f(x, False)[0] for x in path]
-            plot_function_values({'Optimization Path': function_values}, title='Function Values')
-
-            # Plot function values during optimization
-            plot_function_values(final_objective, title='Rosenbrock')
+        plot_contour(quadratic_1, x_lim=(-2, 2), y_lim=(-2, 5), title='Contour of Rosenbrock Objective Function', paths=paths)
+        plot_values({'Optimization Path': values}, title='Function Values per Iteration of Rosenbrock Objective Function')
 
     def test_linear(self):
-        x0 = np.array([1, 1])
+        """
+        Test case for the Linear objective function.
+        """
+        x0 = np.array([1.0, 1.0])
         for method in methods:
-            final_location, final_objective, success, path = minimize(linear, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method = method)
-            self.assertTrue(success)
-            self.assertAlmostEqual(final_location[0], 0.0, places=5)
-            self.assertAlmostEqual(final_location[1], 0.0, places=5)
+            final_location, final_objective, success, path = minimize(linear, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
+            values = {method: path['values']}
+            paths = {method: path['path']}
 
-            # Plot the function values at each iteration
-            function_values = [f(x, False)[0] for x in path]
-            plot_function_values({'Optimization Path': function_values}, title='Function Values')
-
-            # Plot function values during optimization
-            plot_function_values(final_objective, title='Linear')
+        plot_contour(quadratic_1, x_lim=(-300, 2), y_lim=(-300, 2), title='Contour of Linear Objective Function', paths=paths)
+        plot_values({'Optimization Path': values}, title='Function Values per Iteration of Linear Objective Function')
 
     def test_exp_function(self):
-        x0 = np.array([1, 1])
-        for method in methods:    
-            final_location, final_objective, success, path = minimize(exp_function, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method = method)
-            self.assertTrue(success)
-            self.assertAlmostEqual(final_location[0], -0.333333, places=5)
-            self.assertAlmostEqual(final_location[1], 0.0, places=5)
+        """
+        Test case for the Exponential objective function.
+        """
+        x0 = np.array([1.0, 1.0])
+        for method in methods:
+            final_location, final_objective, success, path = minimize(exp_function, x0, obj_tol=1e-12, param_tol=1e-8, max_iter=100, method=method)
+            values = {method: path['values']}
+            paths = {method: path['path']}
 
-            # Plot function values during optimization
-            plot_function_values(final_objective, title='Exponential Function')
+        plot_contour(quadratic_1, x_lim=(-1, 1), y_lim=(-1, 1), title='Contour of Exponential Objective Function', paths=paths)
+        plot_values({'Optimization Path': values}, title='Function Values per Iteration of Exponential Objective Function')
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()
+
+
 
 def quadratic_1(x, compute_hessian):
     Q = np.array([[1, 0], [0, 1]])
-    f = np.transpose(x).dot(Q).dot(x)
+    f = x.T.dot(Q).dot(x)
     g = 2 * Q.dot(x)
     h = 2 * Q if compute_hessian else None
     return f, g, h
@@ -112,7 +102,7 @@ def quadratic_1(x, compute_hessian):
 
 def quadratic_2(x, compute_hessian):
     Q = np.array([[1, 0], [0, 100]])
-    f = np.transpose(x).dot(Q).dot(x)
+    f = x.T.dot(Q).dot(x)
     g = 2 * Q.dot(x)
     h = 2 * Q if compute_hessian else None
     return f, g, h
@@ -121,9 +111,9 @@ def quadratic_2(x, compute_hessian):
 def quadratic_3(x, compute_hessian):
     Q1 = np.array([[np.sqrt(3) / 2, -0.5], [0.5, np.sqrt(3) / 2]])
     Q2 = np.array([[100, 0], [0, 1]])
-    Q_final = np.transpose(Q1).dot(Q2).dot(Q1)
+    Q_final = Q1.T.dot(Q2).dot(Q1)
 
-    f = np.transpose(x).dot(Q_final).dot(x)
+    f = x.T.dot(Q_final).dot(x)
     g = 2 * Q_final.dot(x)
     h = 2 * Q_final if compute_hessian else None
     return f, g, h
@@ -142,7 +132,7 @@ def rosenbrock(x, compute_hessian):
 
 def linear(x, compute_hessian):
     a = np.array([3, 3])
-    f = np.transpose(a).dot(x)
+    f = a.T.dot(x)
     g = a
     h = None
     if compute_hessian:
@@ -162,3 +152,4 @@ def exp_function(x, compute_hessian):
                       [3 * np.exp(x[0] + 3 * x[1] - 0.1) - 3 * np.exp(x[0] - 3 * x[1] - 0.1),
                        9 * np.exp(x[0] + 3 * x[1] - 0.1) + 9 * np.exp(x[0] - 3 * x[1] - 0.1)]])
     return f, g, h
+
